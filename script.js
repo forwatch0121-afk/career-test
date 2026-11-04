@@ -56,19 +56,20 @@ const questions = [
     }
 ];
 
-// ТВОИ ПРОФЕССИИ (добавлен СПОРТ)
 const professions = {
-    tech: "Технический геймдизайнер / Программист / Инженер",
-    social: "Врач / Психолог / Учитель / Менеджер",
-    creative: "Дизайнер / Художник / Видеомейкер",
-    nature: "Ветеринар / Биолог / Эколог / Кинолог",
-    business: "Предприниматель / Маркетолог / Аналитик",
-    power: "Военный / Полицейский / Спасатель",
-    sport: "Спортсмен / Тренер / Инструктор по выживанию / Спасатель-экстремал"
+    tech: "Технический специалист (Программист / Инженер / Геймдизайнер)",
+    social: "Коммуникатор (Врач / Психолог / Учитель / Менеджер)",
+    creative: "Креативщик (Дизайнер / Художник / Видеомейкер)",
+    nature: "Специалист по природе (Ветеринар / Биолог / Эколог)",
+    business: "Деловой человек (Предприниматель / Маркетолог / Аналитик)",
+    power: "Силовая структура (Военный / Полицейский / Спасатель)",
+    sport: "Экстремал (Спортсмен / Тренер / Инструктор по выживанию)"
 };
 
 let currentQuestionIndex = 0;
 let scores = { tech: 0, social: 0, creative: 0, nature: 0, business: 0, power: 0, sport: 0 };
+let userName = ""; // Переменная для имени
+let isWaitingForName = true; // Флаг, ждем ли мы имя
 
 const chatBox = document.getElementById("chat-box");
 const inputArea = document.getElementById("input-area");
@@ -91,9 +92,11 @@ function addUserMessage(text) {
 }
 
 function startChat() {
-    addBotMessage("Система инициализирована. Приготовься к сканированию.");
+    // Теплое приветствие вместо робота
+    addBotMessage("Привет! Я твой персональный помощник по профориентации. Давай найдем твой путь.");
     setTimeout(() => {
-        addBotMessage(questions[currentQuestionIndex].text);
+        addBotMessage("Как я могу к тебе обращаться? Напиши свое имя.");
+        userInput.placeholder = "Напиши свое имя...";
     }, 1000);
 }
 
@@ -104,6 +107,22 @@ function sendMessage() {
     addUserMessage(text);
     userInput.value = "";
 
+    // Если ждем имя
+    if (isWaitingForName) {
+        userName = text;
+        isWaitingForName = false;
+        userInput.placeholder = "Введи 1, 2 или 3...";
+        
+        setTimeout(() => {
+            addBotMessage(`Очень приятно, ${userName}! Теперь ответь на несколько вопросов.`);
+            setTimeout(() => {
+                addBotMessage(questions[currentQuestionIndex].text);
+            }, 800);
+        }, 500);
+        return;
+    }
+
+    // Логика подсчета баллов
     const currentQ = questions[currentQuestionIndex];
     const answer = currentQ.options[text];
 
@@ -121,9 +140,10 @@ function sendMessage() {
             inputArea.style.display = "none";
             setTimeout(() => {
                 let best = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-                addBotMessage("Анализ завершен.");
+                addBotMessage(`Отличная работа, ${userName}! Анализ завершен.`);
                 setTimeout(() => {
-                    addBotMessage(`Твой профиль: ${professions[best]}.\n\nЭто твой путь. Не сверни с него.`);
+                    // Обращаемся к человеку по имени
+                    addBotMessage(`Твой профиль: ${professions[best]}.\n\nЭто твой путь. Удачи!`);
                 }, 1000);
             }, 1000);
         }
