@@ -1,6 +1,6 @@
 body {
-    background-color: #0f172a; /* Глубокий темно-синий (вместо чисто черного) */
-    color: #ffffff;
+    background-color: #121212; /* Глубокий темный фон */
+    color: #f5f5f5; /* Мягкий белый текст */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
@@ -13,14 +13,14 @@ body {
     width: 100%;
     max-width: 600px;
     height: 80vh;
-    background-color: #1e293b; /* Мягкий сине-серый */
+    background-color: #1a1a1a; /* Темно-серый контейнер */
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    /* Мягкое свечение вокруг контейнера */
-    box-shadow: 0 0 40px rgba(56, 189, 248, 0.15), 0 10px 30px rgba(0,0,0,0.5); 
+    /* Теплое оранжевое свечение вокруг всего чата */
+    box-shadow: 0 0 50px rgba(217, 119, 6, 0.15), 0 10px 30px rgba(0,0,0,0.6); 
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(217, 119, 6, 0.2); /* Едва заметная оранжевая рамка */
 }
 
 .chat-box {
@@ -41,46 +41,52 @@ body {
 }
 
 .bot-message {
-    background-color: #334155; /* Более теплый серый для бота */
+    background-color: #2d2a26; /* Теплый песочно-коричневый для бота */
     align-self: flex-start;
     border-bottom-left-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(217, 119, 6, 0.1);
 }
 
 .user-message {
-    background-color: #0ea5e9; /* Яркий голубой акцент для пользователя */
+    background-color: #d97706; /* Приглушенный теплый оранжевый для пользователя */
     color: #ffffff;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2); /* Легкая тень для объема */
 }
 
 .input-area {
     display: flex;
     padding: 20px;
-    background-color: #0f172a;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #121212;
+    border-top: 1px solid rgba(217, 119, 6, 0.15);
 }
 
 input {
     flex: 1;
     padding: 14px;
-    background-color: #1e293b;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #1f1f1f;
+    border: 1px solid rgba(217, 119, 6, 0.2);
     border-radius: 10px;
-    color: white;
+    color: #ffffff;
     outline: none;
     transition: 0.3s;
 }
 
+input::placeholder {
+    color: #888; /* Серый текст подсказки */
+}
+
 input:focus {
-    border-color: #38bdf8; /* Подсветка при вводе */
+    border-color: #d97706; /* Оранжевая рамка при клике */
+    box-shadow: 0 0 10px rgba(217, 119, 6, 0.2);
 }
 
 button {
     margin-left: 12px;
     padding: 14px 24px;
-    background-color: #38bdf8; /* Светлая кнопка */
-    color: #0f172a;
+    background-color: #d97706; /* Кнопка в тон */
+    color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -89,7 +95,8 @@ button {
 }
 
 button:hover {
-    background-color: #7dd3fc;
+    background-color: #b45309; /* Чуть темнее при наведении */
+    box-shadow: 0 0 15px rgba(217, 119, 6, 0.3);
 }
 
 @keyframes fadeIn {
